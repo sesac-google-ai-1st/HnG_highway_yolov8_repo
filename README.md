@@ -3,13 +3,13 @@
 
 ![project image](https://github.com/sesac-google-ai-1st/HnG_highway_yolov8_repo/assets/97524127/48b3c8e2-16f1-4f11-ab50-003736dd9758)
 
-> "고속도로 CCTV 데이터 기반 차량 인식" 데이터를 활용하여 YOLOv8로 Vehicle Object detection
+> 고속도로 CCTV 영상 데이터를 활용한 차량인식 프로젝트
+> 
 
 600개의 background image를 추가하고 xl 모델을 사용하여 best.pt를 구한 결과입니다.
 ![result image](https://github.com/sesac-google-ai-1st/HnG_highway_yolov8_repo/assets/72022988/b2ea1fdd-cd31-4bb2-985a-8da2b06fc050)
 
-모델 학습한 환경입니다. 
-![env](https://github.com/sesac-google-ai-1st/HnG_highway_yolov8_repo/assets/72022988/2a8c8554-13f3-491f-b38e-655656a1d5dc)
+
 
 
 # Contents
@@ -27,17 +27,25 @@
 
 ### 목표
 
-고속도로 CCTV 영상 내 ~~
+    "고속도로 CCTV 데이터 기반 차량 인식" 데이터를 활용하여 YOLOv8로 Vehicle Object detection
 
 ### 수행 기간 및 팀원
 
-🗓️ 수행 기간 : 2023.11.20 ~ 24 (5일)
+- 🗓️ 수행 기간 : 2023.11.20 ~ 24 (5일)
 
-👥 팀원<br>
-|박영현|최지민|
-|:-:|:-:|
-|<img src='https://avatars.githubusercontent.com/u/72022988?v=4' height=80 width=80px></img>|<img src='https://avatars.githubusercontent.com/u/97524127?v=4' height=80 width=80px></img>|
-|[Github](https://github.com/yhp2205)|[Github](https://github.com/timmyeos)|
+- 👥 팀원<br>
+
+    |박영현|최지민|
+    |:-:|:-:|
+    |<img src='https://avatars.githubusercontent.com/u/72022988?v=4' height=80 width=80px></img>|<img src='https://avatars.githubusercontent.com/u/97524127?v=4' height=80 width=80px></img>|
+    |[Github](https://github.com/yhp2205)|[Github](https://github.com/timmyeos)|
+
+### 모델 학습 환경
+
+**GCP** (Google Cloud Platform)
+
+![env](https://github.com/sesac-google-ai-1st/HnG_highway_yolov8_repo/assets/72022988/2a8c8554-13f3-491f-b38e-655656a1d5dc)
+
 
 # 2. 데이터
 
