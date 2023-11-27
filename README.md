@@ -1,6 +1,6 @@
 # HnG_highway_yolov8_repo
 
-> 고속도로 CCTV 영상 데이터를 활용한 차량인식 프로젝트
+> 고속도로 CCTV 영상 데이터를 활용한 차량 인식 프로젝트
 
 ![project image](https://github.com/sesac-google-ai-1st/HnG_highway_yolov8_repo/assets/97524127/f84abe72-dc01-4aa1-ba52-0f861b864cc1)
 
@@ -26,7 +26,9 @@
 
 ### 목표
 
-"고속도로 CCTV 데이터 기반 차량 인식" 데이터를 활용하여 YOLOv8로 Vehicle Object detection
+- "고속도로 CCTV 교통 영상" 데이터를 활용하여 YOLOv8로 Vehicle Object detection
+
+- 평가기준 : mAP50-95
 
 ### 수행 기간 및 팀원
 
@@ -53,10 +55,19 @@
     [![image](https://github.com/sesac-google-ai-1st/HnG_highway_yolov8_repo/assets/97524127/266be1c4-8979-4f71-a610-3f7da727c4da)](https://aihub.or.kr/aihubdata/data/view.do?currMenu=115&topMenu=100&dataSetSn=164)
 
 - 바운딩박스 > 수도권 영동선의 CH01 ~ CH04 만 사용
-- 
+- 데이터 용량 , 개수, 분포 등등
 
 
 # 3. 실험
+
+ - baseline
+   - model: YOLOv8 nano
+   - epochs: 25
+   - batch: 128
+   - imgsz: 640
+   
+    ~결과사진~
+
 
 # 4. 결과
 
