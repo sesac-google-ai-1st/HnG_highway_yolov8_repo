@@ -6,7 +6,7 @@
 
 
 600개의 background image를 추가하고, xl 모델 사용
-![result image](https://github.com/sesac-google-ai-1st/HnG_highway_yolov8_repo/assets/72022988/b2ea1fdd-cd31-4bb2-985a-8da2b06fc050)
+![result image](https://github.com/sesac-google-ai-1st/HnG_highway_yolov8_repo/assets/97524127/df01591a-786f-42e0-950e-05ed347845ed)
 
 ---
 
