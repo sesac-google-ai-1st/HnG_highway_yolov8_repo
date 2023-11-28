@@ -62,18 +62,26 @@ AI Hub [교통문제 해결을 위한 CCTV 교통 영상(고속도로)](https://
 
 |   name   | YOLOv8 model | epoch | batch | imgsz | metric (mAP50-95) |
 |:--------:|:------------:|:-----:|:-----:|:-----:|:-----------------:|
-| baseline |     nano     |   25  |  128  |  640  |                   |
+| baseline |     nano     |   25  |  128  |  640  |       0.743       |
 
-val 이미지 삽입 예
+![baseline result](https://github.com/sesac-google-ai-1st/HnG_highway_yolov8_repo/assets/97524127/bf3b3450-b348-40e4-847a-008094830b8d)
 
 ![result png image](https://github.com/sesac-google-ai-1st/HnG_highway_yolov8_repo/assets/97524127/475e47df-1d4a-4254-a731-b1cd5bd5a06e)
 ![confusion matrix image](https://github.com/sesac-google-ai-1st/HnG_highway_yolov8_repo/assets/97524127/d37416d6-a2f1-4163-8aa2-ae462a4c82d2)
 
-===> 학습 늘리고 & model size up
 
-===> background 
+![mind map](https://github.com/sesac-google-ai-1st/HnG_highway_yolov8_repo/assets/97524127/2246ce5c-a487-4602-a584-eb01f3f26c2f)
 
-===> data imblance
+
+
+
+### 실험 1 : model size & epoch up
+
+|   name   | note | YOLOv8 model | epoch | batch | imgsz | metric (mAP50-95) |
+|:--:|:--------:|:------------:|:-----:|:-----:|:-----:|:-----------------:|
+| baseline |  |    nano     |   25  |  128  |  640  |       0.743       |
+| sdfads | 실험1<br>EarlyStop |    medium     |   58  |  92  |  800  |       0.813       |
+
 
 
 # 4. 결과
