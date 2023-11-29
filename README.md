@@ -114,6 +114,7 @@ AI Hub [교통문제 해결을 위한 CCTV 교통 영상(고속도로)](https://
 | exp1 | EarlyStop |    medium     |   58  |  92  |  800  |       **0.813**       |
 | **exp2** | 시간관계상 Stop |    medium     |   68  |  64  |  640  |       **0.806**       |
 
+
 ![aug m71](https://github.com/sesac-google-ai-1st/HnG_highway_yolov8_repo/assets/97524127/b182c20f-ceaf-4991-8ece-9dd459059d02)
 
 ### ➜ exp2 실험 결과
@@ -133,22 +134,25 @@ AI Hub [교통문제 해결을 위한 CCTV 교통 영상(고속도로)](https://
   - `train/images` 에 background 이미지 **599장** 추가<br>
       background 이미지 추가 방법: https://github.com/ultralytics/yolov5/issues/2844
 
-
+  <br/>
 |   name   | note | YOLOv8 model | epoch | batch | imgsz | metric (mAP50-95) |
 |:--:|:--------:|:------------:|:-----:|:-----:|:-----:|:-----------------:|
 | baseline |  |    nano     |   25  |  128  |  640  |       0.743       |
 | exp1 | EarlyStop |    medium     |   58  |  92  |  800  |       **0.813**       |
 | exp2 | 시간관계상 Stop |    medium     |   68  |  64  |  640  |       0.806       |
 | **exp3-1** | EarlyStop |    medium     |   40  |  92  |  800  |       **0.814**       |
-
+<br/>
 
 ![back m100](https://github.com/sesac-google-ai-1st/HnG_highway_yolov8_repo/assets/97524127/f6269eb7-130d-473a-a119-bffbe689613b)
 
 ### ➜ exp3-1 실험 결과
   - exp1과 exp3-1은 background 이미지 차이뿐인데, 거의 모든 성능 지표에서 exp3-1가 미세하게 높음
   - **background 이미지 추가한 것이 효과 있다**는 의미
+ 
+  <br/>
 
-
+---
+  <br/>
 
 |   name   | note | YOLOv8 model | epoch | batch | imgsz | metric (mAP50-95) |
 |:--:|:--------:|:------------:|:-----:|:-----:|:-----:|:-----------------:|
@@ -157,7 +161,7 @@ AI Hub [교통문제 해결을 위한 CCTV 교통 영상(고속도로)](https://
 | exp2 | 시간관계상 Stop |    medium     |   68  |  64  |  640  |       0.806       |
 | exp3-1 | EarlyStop |    medium     |   40  |  92  |  800  |       0.814       |
 | **exp3-2** | EarlyStop<br>best model |    **xlarge**     |   47  |  32  |  800  |       ✨ **0.823** ✨       |
-
+  <br/>
 
 ![back x100](https://github.com/sesac-google-ai-1st/HnG_highway_yolov8_repo/assets/97524127/7ae50a8f-fb8b-4e64-8910-76d64e6f6ba0)
 
