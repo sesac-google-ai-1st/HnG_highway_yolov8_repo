@@ -171,7 +171,7 @@ AI Hub [교통문제 해결을 위한 CCTV 교통 영상(고속도로)](https://
 
 # 4. 결과
 
-
+![highway-optimize](https://github.com/sesac-google-ai-1st/HnG_highway_yolov8_repo/assets/97524127/387caefc-53ff-48cb-b9fe-7e960dbaee12)
 
 
 # 5. 활용 방안
