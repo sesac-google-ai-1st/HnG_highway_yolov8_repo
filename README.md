@@ -15,7 +15,8 @@
 
 ## How to run
 ```
-git clone
+git clone https://github.com/sesac-google-ai-1st/HnG_highway_yolov8_repo.git
+pip install -r requirements.txt
 ~~~내용 추가 예정
 ```
 ---
