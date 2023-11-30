@@ -5,17 +5,19 @@
 ![project image](https://github.com/sesac-google-ai-1st/HnG_highway_yolov8_repo/assets/97524127/f84abe72-dc01-4aa1-ba52-0f861b864cc1)
 
 
-# Demo
+# 🚗🚛🚌 Demo 
 
 ![demo_croped](https://github.com/sesac-google-ai-1st/HnG_highway_yolov8_repo/assets/97524127/a9acd260-eeb5-49bb-9e73-9919b218b86e)
 
 
-### Best model validation result
+## 🤗 Best model validation result
 ![result image](https://github.com/sesac-google-ai-1st/HnG_highway_yolov8_repo/assets/97524127/df01591a-786f-42e0-950e-05ed347845ed)
 
 ---
 
-# Contents
+<br>
+
+# 📃 Contents
 
 [1. 프로젝트 소개](#1-프로젝트-소개) <br>
 [2. 데이터](#2-데이터) <br>
@@ -24,13 +26,14 @@
 [5. 활용 방안](#5-활용-방안) <br>
 [6. 프로젝트 회고](#6-프로젝트-회고) <br>
 
-
+<br>
 
 # 1. 프로젝트 소개
 
 ### 목표
 
 - "고속도로 CCTV 교통 영상" 데이터를 활용하여 YOLOv8로 Vehicle Object detection
+  - COCO dataset으로 pretrained 된 [YOLOv8](https://docs.ultralytics.com/models/yolov8/) 모델을 <br> AI Hub "고속도로 CCTV 교통 영상" 데이터셋으로 fine tuning
 
 - 평가 metric : **mAP50-95**
 
@@ -45,6 +48,14 @@
     |<img src='https://avatars.githubusercontent.com/u/72022988?v=4' height=80 width=80px></img>|<img src='https://avatars.githubusercontent.com/u/97524127?v=4' height=80 width=80px></img>|
     |[Github](https://github.com/yhp2205)|[Github](https://github.com/timmyeos)|
 
+### repo structure
+
+```
+|-- README.md
+|-- code
+~~~~
+```
+
 ### 모델 학습 환경
 
 - **GCP** (Google Cloud Platform)
@@ -52,16 +63,38 @@
     ![env](https://github.com/sesac-google-ai-1st/HnG_highway_yolov8_repo/assets/72022988/2a8c8554-13f3-491f-b38e-655656a1d5dc)
 
 ### Project Workflow
-![workflow](https://github.com/sesac-google-ai-1st/HnG_highway_yolov8_repo/assets/97524127/949c70ab-5c55-4bec-bcec-fd56e8efc84f)
+![workflow](https://github.com/sesac-google-ai-1st/HnG_highway_yolov8_repo/assets/97524127/52299e58-e157-4f93-a626-bb06d7c17814)
 
 # 2. 데이터
 
-AI Hub [교통문제 해결을 위한 CCTV 교통 영상(고속도로)](https://aihub.or.kr/aihubdata/data/view.do?currMenu=115&topMenu=100&dataSetSn=164) > 바운딩박스 > 수도권 영동선의 CH01 ~ CH04 만 사용
+### AI Hub [교통문제 해결을 위한 CCTV 교통 영상(고속도로)](https://aihub.or.kr/aihubdata/data/view.do?currMenu=115&topMenu=100&dataSetSn=164) > 바운딩박스 > 수도권 영동선의 CH01 ~ CH04 사용
   
 [![image](https://github.com/sesac-google-ai-1st/HnG_highway_yolov8_repo/assets/97524127/266be1c4-8979-4f71-a610-3f7da727c4da)](https://aihub.or.kr/aihubdata/data/view.do?currMenu=115&topMenu=100&dataSetSn=164)
 
-- 데이터 용량 , 개수, 분포 등등
-여기~~~
+- 데이터 용량
+  ~~사진 첨부~~!
+- 데이터 개수
+  - train 총 데이터 개수: 23951
+  - valid 총 데이터 개수: 3333
+
+### EDA 요약
+- image 파일 이름과 label을 통해 추출한 정보
+  
+  <img src='https://github.com/sesac-google-ai-1st/HnG_highway_yolov8_repo/assets/97524127/da0ded2d-178a-4d4c-8f9a-3b0b628672ab' width="700" height="350" />
+- train 데이터의 각 column 별 unique 값
+  
+  <img src='https://github.com/sesac-google-ai-1st/HnG_highway_yolov8_repo/assets/97524127/1beb85a2-2e2b-4806-8316-ed5f6f339f86' width="600" height="250" />
+- image 데이터의 시간 및 날씨 분포 (train , valid)
+  | 시간 | 날씨 |
+  |:----:|:----:|
+  | ![time image](https://github.com/sesac-google-ai-1st/HnG_highway_yolov8_repo/assets/97524127/6fedd5d0-e99e-4919-9d8d-9da87c04ff17) | ![weather image](https://github.com/sesac-google-ai-1st/HnG_highway_yolov8_repo/assets/97524127/1b4e370b-868b-43e6-9e56-1eb2a10d2c12) |
+- label 분포
+  
+  <img src='https://github.com/sesac-google-ai-1st/HnG_highway_yolov8_repo/assets/97524127/8671432a-a27c-4015-8184-a9c5aff87cbb' width="450" height="350" />
+
+➜ **train과 valid의 데이터가 매우 유사한 것을 확인함**
+
+<br>
 
 # 3. 실험
 
@@ -87,7 +120,7 @@ AI Hub [교통문제 해결을 위한 CCTV 교통 영상(고속도로)](https://
 |   name   | note | YOLOv8 model | epoch | batch | imgsz | metric (mAP50-95) |
 |:--:|:--------:|:------------:|:-----:|:-----:|:-----:|:-----------------:|
 | baseline |  |    nano     |   25  |  128  |  640  |       0.743       |
-| **exp1** | EarlyStop |    medium     |   58  |  92  |  800  |       **0.813**       |
+| **exp1** | model & epoch ⬆ <br> EarlyStop|    medium     |   58  |  92  |  800  |       **0.813**       |
 
 ![m400](https://github.com/sesac-google-ai-1st/HnG_highway_yolov8_repo/assets/97524127/2afa5d30-5f7a-4ec2-a452-d73f12d9aa03)
 
@@ -111,8 +144,8 @@ AI Hub [교통문제 해결을 위한 CCTV 교통 영상(고속도로)](https://
 |   name   | note | YOLOv8 model | epoch | batch | imgsz | metric (mAP50-95) |
 |:--:|:--------:|:------------:|:-----:|:-----:|:-----:|:-----------------:|
 | baseline |  |    nano     |   25  |  128  |  640  |       0.743       |
-| exp1 | EarlyStop |    medium     |   58  |  92  |  800  |       **0.813**       |
-| **exp2** | 시간관계상 Stop |    medium     |   68  |  64  |  640  |       **0.806**       |
+| exp1 | model & epoch ⬆ <br> EarlyStop |    medium     |   58  |  92  |  800  |       **0.813**       |
+| **exp2** | class imbalance <br> 시간관계상 Stop |    medium     |   68  |  64  |  640  |       **0.806**       |
 
 
 ![aug m71](https://github.com/sesac-google-ai-1st/HnG_highway_yolov8_repo/assets/97524127/b182c20f-ceaf-4991-8ece-9dd459059d02)
@@ -138,9 +171,9 @@ AI Hub [교통문제 해결을 위한 CCTV 교통 영상(고속도로)](https://
 |   name   | note | YOLOv8 model | epoch | batch | imgsz | metric (mAP50-95) |
 |:--:|:--------:|:------------:|:-----:|:-----:|:-----:|:-----------------:|
 | baseline |  |    nano     |   25  |  128  |  640  |       0.743       |
-| exp1 | EarlyStop |    medium     |   58  |  92  |  800  |       **0.813**       |
-| exp2 | 시간관계상 Stop |    medium     |   68  |  64  |  640  |       0.806       |
-| **exp3-1** | EarlyStop |    medium     |   40  |  92  |  800  |       **0.814**       |
+| exp1 | model & epoch ⬆ <br> EarlyStop |    medium     |   58  |  92  |  800  |       **0.813**       |
+| exp2 | class imbalance <br> 시간관계상 Stop |    medium     |   68  |  64  |  640  |       0.806       |
+| **exp3-1** | background <br> EarlyStop |    medium     |   40  |  92  |  800  |       **0.814**       |
 <br/>
 
 ![back m100](https://github.com/sesac-google-ai-1st/HnG_highway_yolov8_repo/assets/97524127/f6269eb7-130d-473a-a119-bffbe689613b)
@@ -157,24 +190,48 @@ AI Hub [교통문제 해결을 위한 CCTV 교통 영상(고속도로)](https://
 |   name   | note | YOLOv8 model | epoch | batch | imgsz | metric (mAP50-95) |
 |:--:|:--------:|:------------:|:-----:|:-----:|:-----:|:-----------------:|
 | baseline |  |    nano     |   25  |  128  |  640  |       0.743       |
-| exp1 | EarlyStop |    medium     |   58  |  92  |  800  |       0.813       |
-| exp2 | 시간관계상 Stop |    medium     |   68  |  64  |  640  |       0.806       |
-| exp3-1 | EarlyStop |    medium     |   40  |  92  |  800  |       0.814       |
-| **exp3-2** | EarlyStop<br>best model |    **xlarge**     |   47  |  32  |  800  |       ✨ **0.823** ✨       |
+| exp1 | model & epoch ⬆ <br> EarlyStop |    medium     |   58  |  92  |  800  |       0.813       |
+| exp2 | class imbalance <br> 시간관계상 Stop |    medium     |   68  |  64  |  640  |       0.806       |
+| exp3-1 | background <br> EarlyStop |    medium     |   40  |  92  |  800  |       0.814       |
+| **exp3-2** | background <br> EarlyStop <br> **best model** |    **xlarge**     |   47  |  32  |  800  |       ✨ **0.823** ✨       |
   <br/>
 
 ![back x100](https://github.com/sesac-google-ai-1st/HnG_highway_yolov8_repo/assets/97524127/7ae50a8f-fb8b-4e64-8910-76d64e6f6ba0)
-
+![results](https://github.com/sesac-google-ai-1st/3monkey_yolo/assets/97524127/b3b9d5e9-cbf6-413c-9f39-9082b004bf75)
+![confusion_matrix_normalized](https://github.com/sesac-google-ai-1st/3monkey_yolo/assets/97524127/cee42e17-82fc-4102-98e6-de54e9befdcf)
 ### ➜ exp3-2 실험 결과
   - exp3-1 결과를 참고하여 모델 사이즈를 키우니,<br>
-   👏👏👏 best 결과를 얻음 👏👏👏
+   👏👏👏 best mAP50-95 결과를 얻음 👏👏👏
+
+<br>
 
 # 4. 결과
 
+### baseline과 best model의 predict 비교<sup>[1](#footnote_1)</sup>
 ![highway-optimize](https://github.com/sesac-google-ai-1st/HnG_highway_yolov8_repo/assets/97524127/387caefc-53ff-48cb-b9fe-7e960dbaee12)
 
+| baseline                                | best                               |
+|:-----------------------------------------:|:------------------------------------:|
+| CCTV 영상 내 글자를 car로 인식함        | 그런 현상 없음                     |
+| 멀리서 오는 bus를 초반에 truck으로 인식 | 멀리서부터 bus로 인식              |
+
+- best model이 비교적 안정적으로 vehicle을 인식함
+- 결과결과~~
+- 한계점~~
+
+<a name="footnote_1">1</a>. 영상 출처: [국가교통정보센터](https://its.go.kr/map/cctv) 영동선 신갈분기점 CCTV
+
+<br>
 
 # 5. 활용 방안
+
+
+![활용 방안](https://github.com/sesac-google-ai-1st/HnG_highway_yolov8_repo/assets/97524127/a35f03b6-b50a-4f57-846b-899234c96609)
+
+- 위 사진처럼 AI model은 이미지/비디오 속 car, bus, truck의 개수를 찾아낼 수 있다.
+- 따라서 고속도로 CCTV 영상 내 교통량을 자동으로 측정하는 데에 활용할 수 있다.
+
+<br>
 
 # 6. 프로젝트 회고
 
