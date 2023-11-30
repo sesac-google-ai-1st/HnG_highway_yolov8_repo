@@ -5,7 +5,7 @@
 ![project image](https://github.com/sesac-google-ai-1st/HnG_highway_yolov8_repo/assets/97524127/f84abe72-dc01-4aa1-ba52-0f861b864cc1)
 
 
-# 🚗🚛🚌 Demo 
+# 🚗🚌🚛 Demo 
 
 ![demo_croped](https://github.com/sesac-google-ai-1st/HnG_highway_yolov8_repo/assets/97524127/a9acd260-eeb5-49bb-9e73-9919b218b86e)
 
@@ -72,7 +72,9 @@
 [![image](https://github.com/sesac-google-ai-1st/HnG_highway_yolov8_repo/assets/97524127/266be1c4-8979-4f71-a610-3f7da727c4da)](https://aihub.or.kr/aihubdata/data/view.do?currMenu=115&topMenu=100&dataSetSn=164)
 
 - 데이터 용량
-  ~~사진 첨부~~!
+
+  ![스크린샷 2023-11-30 132142](https://github.com/sesac-google-ai-1st/HnG_highway_yolov8_repo/assets/72022988/20f5cc82-da2d-47a6-88e6-2c9bee1968c4)
+
 - 데이터 개수
   - train 총 데이터 개수: 23951
   - valid 총 데이터 개수: 3333
