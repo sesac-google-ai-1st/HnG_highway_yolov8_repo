@@ -17,7 +17,7 @@
 ```
 git clone https://github.com/sesac-google-ai-1st/HnG_highway_yolov8_repo.git
 pip install -r requirements.txt
-~~~내용 추가 예정
+내용 추가 예정~~~
 ```
 ---
 
@@ -48,7 +48,6 @@ pip install -r requirements.txt
 [6. 프로젝트 회고](#6-프로젝트-회고) <br>
   - [어려웠던 점](#어려웠던-점)
   - [배운 점](#배운-점)
-  - [공유하고 싶은 내용](#공유하고-싶은-내용)
 
 
 <br>
@@ -180,7 +179,7 @@ pip install -r requirements.txt
 |   name   | note | YOLOv8 model | epoch | batch | imgsz | metric (mAP50-95) |
 |:--:|:--------:|:------------:|:-----:|:-----:|:-----:|:-----------------:|
 | baseline |  |    nano     |   25  |  128  |  640  |       0.743       |
-| **exp1** | model & epoch ⬆ <br> EarlyStop|    medium     |   58  |  92  |  800  |       **0.813**       |
+| **exp1** | model & epoch ↑ <br> EarlyStop|    medium     |   58  |  92  |  800  |       **0.813**       |
 
 ![m400](https://github.com/sesac-google-ai-1st/HnG_highway_yolov8_repo/assets/97524127/2afa5d30-5f7a-4ec2-a452-d73f12d9aa03)
 
@@ -204,7 +203,7 @@ pip install -r requirements.txt
 |   name   | note | YOLOv8 model | epoch | batch | imgsz | metric (mAP50-95) |
 |:--:|:--------:|:------------:|:-----:|:-----:|:-----:|:-----------------:|
 | baseline |  |    nano     |   25  |  128  |  640  |       0.743       |
-| exp1 | model & epoch ⬆ <br> EarlyStop |    medium     |   58  |  92  |  800  |       **0.813**       |
+| exp1 | model & epoch ↑ <br> EarlyStop |    medium     |   58  |  92  |  800  |       **0.813**       |
 | **exp2** | class imbalance <br> 시간관계상 Stop |    medium     |   68  |  64  |  640  |       **0.806**       |
 
 
@@ -231,7 +230,7 @@ pip install -r requirements.txt
 |   name   | note | YOLOv8 model | epoch | batch | imgsz | metric (mAP50-95) |
 |:--:|:--------:|:------------:|:-----:|:-----:|:-----:|:-----------------:|
 | baseline |  |    nano     |   25  |  128  |  640  |       0.743       |
-| exp1 | model & epoch ⬆ <br> EarlyStop |    medium     |   58  |  92  |  800  |       **0.813**       |
+| exp1 | model & epoch ↑ <br> EarlyStop |    medium     |   58  |  92  |  800  |       **0.813**       |
 | exp2 | class imbalance <br> 시간관계상 Stop |    medium     |   68  |  64  |  640  |       0.806       |
 | **exp3-1** | background <br> EarlyStop |    medium     |   40  |  92  |  800  |       **0.814**       |
 <br/>
@@ -250,7 +249,7 @@ pip install -r requirements.txt
 |   name   | note | YOLOv8 model | epoch | batch | imgsz | metric (mAP50-95) |
 |:--:|:--------:|:------------:|:-----:|:-----:|:-----:|:-----------------:|
 | baseline |  |    nano     |   25  |  128  |  640  |       0.743       |
-| exp1 | model & epoch ⬆ <br> EarlyStop |    medium     |   58  |  92  |  800  |       0.813       |
+| exp1 | model & epoch ↑ <br> EarlyStop |    medium     |   58  |  92  |  800  |       0.813       |
 | exp2 | class imbalance <br> 시간관계상 Stop |    medium     |   68  |  64  |  640  |       0.806       |
 | exp3-1 | background <br> EarlyStop |    medium     |   40  |  92  |  800  |       0.814       |
 | **exp3-2** | background <br> EarlyStop <br> **best model** |    **xlarge**     |   47  |  32  |  800  |       ✨ **0.823** ✨       |
@@ -285,7 +284,6 @@ pip install -r requirements.txt
   - 객체를 어느 정도 거리부터 인식할 수 있는지 기준이 정확하지 않음
   - 검증 영상의 화질에 따라 정확도에 영향을 미침
   - best 모델의 크기가 커서 검증 속도가 느리기 때문에 고속도로 실시간 분석에 어려움이 있음
-  - 여러 조건에서 실험을 진행했음에도 점수가 0.83 이상으로 높게 올라가지 않음
 
 <br>
 
@@ -306,8 +304,26 @@ pip install -r requirements.txt
 # 6. 프로젝트 회고
 
 ### 어려웠던 점
-  - 시간 관계상 데이터를 더 적극적으로 수정하지 못함
+  - 모델 학습을 위해 데이터를 준비하는 과정
+    - 데이터 용량이 너무 커서 (약 40GB) 데이터 다루는 데에 시간이 오래 걸림
+      - AI Hub에서 데이터 다운받는 것
+      - 압축한 zip 파일을 GCP cloud storage(bucket)에 업로드하는 것
+      - bucket에서 zip 파일을 가져와서 압축 푸는 것 <br>
+      ⇒  각각 n시간 소요됨
+    - 이후에 빠른 방법을 찾아냄
+      - AI Hub에서 데이터 다운 ➝ Workbench 터미널에서 바로 [AI Hub API](https://www.aihub.or.kr/devsport/apishell/list.do?currMenu=403&topMenu=100) 사용
+      -  bucket에서 zip 파일 압축 푸는 것 ➝ multiprocessing을 통해 n초로 단축
+  - Multi-GPU 사용
+    - 학습 시, 한개의 GPU를 쓸 땐 문제가 없었는데 `device=[0,1]`을 설정하면 계속 에러 발생함
+    - Troubleshooting
+      - `pip install ultralytics` 시, 에러메세지 : `FileNotFoundError`
+      - `git clone https://github.com/ultralytics/ultralytics`  시, 에러메세지 : `CalledProcessError` <br>
+      ⇒ `pip`와 `git clone`을 둘 다 하니까 Multi-GPU 사용 가능했음
+      - 프로젝트 수행 당시 ultralytics 버전(8.0.20)의 문제로 추측함
 
 ### 배운 점
-
-### 공유하고 싶은 내용~~
+  - GCP cloud storage(bucket)를 통해 대용량 데이터를 다루는 경험을 함
+  - YOLO를 학습시키기 위한 custom dataset 구조를 알게 됨
+  - 모델 성능 올리기가 어려움
+    - 여러 조건에서 실험을 진행했음에도 점수가 0.83 이상으로 높게 올라가지 않음
+    - 시간이 충분했다면, 데이터를 더 적극적으로 수정/보완했을 것
