@@ -13,6 +13,11 @@
 ## 🤗 Best model validation result
 ![result image](https://github.com/sesac-google-ai-1st/HnG_highway_yolov8_repo/assets/97524127/df01591a-786f-42e0-950e-05ed347845ed)
 
+## How to run
+```
+git clone
+~~~내용 추가 예정
+```
 ---
 
 <br>
@@ -20,11 +25,30 @@
 # 📃 Contents
 
 [1. 프로젝트 소개](#1-프로젝트-소개) <br>
+  - [목표](#목표)
+  - [수행 기간 및 팀원](#수행-기간-및-팀원)
+  - [repo structure](#repo-structure)
+  - [모델 학습 환경](#모델-학습-환경)
+  - [Project Workflow]()
+  
 [2. 데이터](#2-데이터) <br>
+  - [EDA 요약](#eda-요약)
+
 [3. 실험](#3-실험) <br>
+  - [baseline](#0-baseline)
+  - [실험 1 : model size & epoch up](#실험-1--model-size--epoch-up)
+  - [실험 2 : class imbalance](#실험-2--class-imbalance)
+  - [실험 3 : add background data](#실험-3--add-background-data)
+
 [4. 결과](#4-결과) <br>
+
 [5. 활용 방안](#5-활용-방안) <br>
+
 [6. 프로젝트 회고](#6-프로젝트-회고) <br>
+  - [어려웠던 점](#어려웠던-점)
+  - [배운 점](#배운-점)
+  - [공유하고 싶은 내용](#공유하고-싶은-내용)
+
 
 <br>
 
@@ -51,19 +75,40 @@
 ### repo structure
 
 ```
-|-- README.md
-|-- code
-~~~~
+├── README.md
+├── requirements.txt
+├── code
+│  ├─ EDA
+│  │   ├─ highway_EDA.ipynb
+│  │   ├─ highway_train.csv
+│  │   └─ highway_valid.csv
+│  ├─ data_handling
+│  │   ├─ draw_bounding_box.py
+│  │   ├─ highway_dataset_preprocess.ipynb
+│  │   ├─ highway_images_folder_merge.ipynb
+│  │   └─ highway_labels_xml2txt.ipynb
+│  └─ train.ipynb    # YOLOv8 모델 학습
+└── models    # 각 모델 하위 weights 폴더에 pt 파일 있음 
+   ├─ train_aug_m71
+   ├─ train_back_m100
+   ├─ train_back_x100
+   ├─ train_de_m100
+   ├─ train_m100
+   ├─ train_m400
+   ├─ train_n25
+   └─ val_back_x100
 ```
 
 ### 모델 학습 환경
 
+- ultralytics 버전 :  8.0.20
 - **GCP** (Google Cloud Platform)
 
     ![env](https://github.com/sesac-google-ai-1st/HnG_highway_yolov8_repo/assets/72022988/2a8c8554-13f3-491f-b38e-655656a1d5dc)
 
 ### Project Workflow
-![workflow](https://github.com/sesac-google-ai-1st/HnG_highway_yolov8_repo/assets/97524127/52299e58-e157-4f93-a626-bb06d7c17814)
+![workflow](https://github.com/sesac-google-ai-1st/saramin-repo-1/assets/97524127/129bf398-3ade-445d-adaf-7a6fb027859e)
+
 
 # 2. 데이터
 
@@ -74,6 +119,18 @@
 - 데이터 용량
 
   ![스크린샷 2023-11-30 132142](https://github.com/sesac-google-ai-1st/HnG_highway_yolov8_repo/assets/72022988/20f5cc82-da2d-47a6-88e6-2c9bee1968c4)
+
+- 최종 데이터 구조
+  ```
+  dataset
+  ├─ train
+  │ ├─ images
+  │ └─ labels
+  ├─ validation
+  │ ├─ images
+  │ └─ labels
+  └─ data.yaml
+  ```
 
 - 데이터 개수
   - train 총 데이터 개수: 23951
@@ -90,7 +147,7 @@
   | 시간 | 날씨 |
   |:----:|:----:|
   | ![time image](https://github.com/sesac-google-ai-1st/HnG_highway_yolov8_repo/assets/97524127/6fedd5d0-e99e-4919-9d8d-9da87c04ff17) | ![weather image](https://github.com/sesac-google-ai-1st/HnG_highway_yolov8_repo/assets/97524127/1b4e370b-868b-43e6-9e56-1eb2a10d2c12) |
-- label 분포
+- label 분포 : car >>>>> truck > bus
   
   <img src='https://github.com/sesac-google-ai-1st/HnG_highway_yolov8_repo/assets/97524127/8671432a-a27c-4015-8184-a9c5aff87cbb' width="450" height="350" />
 
@@ -221,6 +278,8 @@
 - 결과결과~~
 - 한계점~~
 
+<br>
+
 <a name="footnote_1">1</a>. 영상 출처: [국가교통정보센터](https://its.go.kr/map/cctv) 영동선 신갈분기점 CCTV
 
 <br>
@@ -237,3 +296,8 @@
 
 # 6. 프로젝트 회고
 
+### 어려웠던 점
+
+### 배운 점
+
+### 공유하고 싶은 내용~~
