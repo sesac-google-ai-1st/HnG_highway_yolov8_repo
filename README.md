@@ -15,10 +15,18 @@
 
 ## How to run
 ```
-git clone https://github.com/sesac-google-ai-1st/HnG_highway_yolov8_repo.git
-pip install -r requirements.txt
-내용 추가 예정~~~
+!git clone https://github.com/sesac-google-ai-1st/HnG_highway_yolov8_repo.git
+%cd HnG_highway_yolov8_repo
+!pip install -r requirements.txt
+
+# models dir 하위 모든 모델로 변경 가능
+model_path = "./models/train_back_x100/weights/best.pt"
+# test를 원하는 이미지/동영상 경로
+test_src_path = "test_image.png"
+
+!yolo task=detect mode=predict model={model_path} conf=0.25 source={test_src_path}
 ```
+
 ---
 
 <br>
@@ -77,6 +85,7 @@ pip install -r requirements.txt
 ```
 ├── README.md
 ├── requirements.txt
+├── test_image.png
 ├── code
 │  ├─ EDA
 │  │   ├─ highway_EDA.ipynb
@@ -88,14 +97,14 @@ pip install -r requirements.txt
 │  │   ├─ highway_images_folder_merge.ipynb
 │  │   └─ highway_labels_xml2txt.ipynb
 │  └─ train.ipynb    # YOLOv8 모델 학습
-└── models    # 각 모델 하위 weights 폴더에 pt 파일 있음 
+└── models    # 각 모델 폴더 하위 weights 폴더에 pt 파일 있음 
    ├─ train_aug_m71
    ├─ train_back_m100
-   ├─ train_back_x100
+   ├─ train_back_x100   # best model
    ├─ train_de_m100
    ├─ train_m100
    ├─ train_m400
-   ├─ train_n25
+   ├─ train_n25   # baseline
    └─ val_back_x100
 ```
 
@@ -324,6 +333,6 @@ pip install -r requirements.txt
 ### 배운 점
   - GCP cloud storage(bucket)를 통해 대용량 데이터를 다루는 경험을 함
   - YOLO를 학습시키기 위한 custom dataset 구조를 알게 됨
-  - 모델 성능 올리기가 어려움
+  - 모델 성능 올리기가 쉽지 않았음
     - 여러 조건에서 실험을 진행했음에도 점수가 0.83 이상으로 높게 올라가지 않음
     - 시간이 충분했다면, 데이터를 더 적극적으로 수정/보완했을 것
