@@ -14,7 +14,7 @@
 ![result image](https://github.com/sesac-google-ai-1st/HnG_highway_yolov8_repo/assets/97524127/df01591a-786f-42e0-950e-05ed347845ed)
 
 ## How to run
-```
+```python
 !git clone https://github.com/sesac-google-ai-1st/HnG_highway_yolov8_repo.git
 %cd HnG_highway_yolov8_repo
 !pip install -r requirements.txt
@@ -82,7 +82,7 @@ test_src_path = "test_image.png"
 
 ### repo structure
 
-```
+```python
 ├── README.md
 ├── requirements.txt
 ├── test_image.png
