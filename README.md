@@ -193,7 +193,7 @@ test_src_path = "test_image.png"
 ![m400](https://github.com/sesac-google-ai-1st/HnG_highway_yolov8_repo/assets/97524127/2afa5d30-5f7a-4ec2-a452-d73f12d9aa03)
 
 ### ➜ exp1 실험 결과
-  - 모델 사이즈를 키우고 학습을 늘리니까, mAP50-95가 상승했음
+  - 모델 사이즈를 nano에서 medium model로 키우고 학습 epoch를 25에서 58로 늘린 결과, mAP50-95가 상승했음
 
 <br>
 
@@ -230,7 +230,7 @@ test_src_path = "test_image.png"
 ![roboflow image](https://github.com/sesac-google-ai-1st/HnG_highway_yolov8_repo/assets/97524127/b50ecdf0-0366-478f-a51e-b30241e689a5)
 
 - background 데이터를 추가함
-  - [국가교통정보센터](https://its.go.kr/map/cctv)에서 차가 없는 빈 도로 (background) 이미지 150장을 직접 캡쳐함
+  - 고속도로 CCTV 자료를 제공하는 [국가교통정보센터](https://its.go.kr/map/cctv)에서 차가 없는 빈 도로 (background) 이미지 150장을 직접 캡쳐함
   - 그 후 [roboflow](https://roboflow.com/)에서 증강을 통해 599장으로 만듦
   - `train/images` 에 background 이미지 **599장** 추가<br>
       background 이미지 추가 방법: https://github.com/ultralytics/yolov5/issues/2844
