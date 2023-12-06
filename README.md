@@ -225,13 +225,15 @@ test_src_path = "test_image.png"
 <br>
 
 ## 실험 3 : add background data
-![스크린샷 2023-12-06 165445](https://github.com/sesac-google-ai-1st/HnG_highway_yolov8_repo/assets/72022988/191a9336-dae0-4bf3-9c8f-46c516f272e6)
-![스크린샷 2023-12-06 165013](https://github.com/sesac-google-ai-1st/HnG_highway_yolov8_repo/assets/72022988/51f45e95-daba-4015-a22e-1e6470b8ef05)
+![스크린샷 2023-12-06 165445](https://github.com/sesac-google-ai-1st/HnG_highway_yolov8_repo/assets/72022988/816d0ad6-2c10-4894-8478-1119557064d6)  
+<br/>
+
+![스크린샷 2023-12-06 165013](https://github.com/sesac-google-ai-1st/HnG_highway_yolov8_repo/assets/72022988/a6e1fdd5-9e0c-43ec-8940-b9eccd0a3018)
 
 
 - background 데이터를 추가함
   - 고속도로 CCTV 자료를 제공하는 [국가교통정보센터](https://its.go.kr/map/cctv)에서 차가 없는 빈 도로 (background) 이미지 150장을 캡쳐함
-  - image argumentation을 통해 599장으로 데이터 증강
+  - 위 이미지를 image augmentation(Resize, Crop, Cropout 등) 하여 아래와 같은 이미지를 추가, 599장으로 데이터 증강
   - `train/images` 에 background 이미지 **599장** 추가<br>
       background 이미지 추가 방법: https://github.com/ultralytics/yolov5/issues/2844
 
