@@ -51,9 +51,7 @@ test_src_path = "test_image.png"
 
 [4. 결과](#4-결과) <br>
 
-[5. 활용 방안](#5-활용-방안) <br>
-
-[6. 프로젝트 회고](#6-프로젝트-회고) <br>
+[5. 프로젝트 회고](#5-프로젝트-회고) <br>
   - [어려웠던 점](#어려웠던-점)
   - [배운 점](#배운-점)
 
@@ -147,8 +145,8 @@ test_src_path = "test_image.png"
 
 ### EDA 요약
 - image 파일 이름과 label을 통해 추출한 정보
-  
-  <img src='https://github.com/sesac-google-ai-1st/HnG_highway_yolov8_repo/assets/97524127/da0ded2d-178a-4d4c-8f9a-3b0b628672ab' width="700" height="350" />
+ 
+  <img src='https://github.com/sesac-google-ai-1st/HnG_highway_yolov8_repo/assets/72022988/16805727-3d8d-417b-a94a-87cd163d14a5' width="700" height="200" />  
 - train 데이터의 각 column 별 unique 값
   
   <img src='https://github.com/sesac-google-ai-1st/HnG_highway_yolov8_repo/assets/97524127/1beb85a2-2e2b-4806-8316-ed5f6f339f86' width="600" height="250" />
@@ -227,11 +225,13 @@ test_src_path = "test_image.png"
 <br>
 
 ## 실험 3 : add background data
-![roboflow image](https://github.com/sesac-google-ai-1st/HnG_highway_yolov8_repo/assets/97524127/b50ecdf0-0366-478f-a51e-b30241e689a5)
+![스크린샷 2023-12-06 165445](https://github.com/sesac-google-ai-1st/HnG_highway_yolov8_repo/assets/72022988/191a9336-dae0-4bf3-9c8f-46c516f272e6)
+![스크린샷 2023-12-06 165013](https://github.com/sesac-google-ai-1st/HnG_highway_yolov8_repo/assets/72022988/51f45e95-daba-4015-a22e-1e6470b8ef05)
+
 
 - background 데이터를 추가함
-  - 고속도로 CCTV 자료를 제공하는 [국가교통정보센터](https://its.go.kr/map/cctv)에서 차가 없는 빈 도로 (background) 이미지 150장을 직접 캡쳐함
-  - 그 후 [roboflow](https://roboflow.com/)에서 증강을 통해 599장으로 만듦
+  - 고속도로 CCTV 자료를 제공하는 [국가교통정보센터](https://its.go.kr/map/cctv)에서 차가 없는 빈 도로 (background) 이미지 150장을 캡쳐함
+  - image argumentation을 통해 599장으로 데이터 증강
   - `train/images` 에 background 이미지 **599장** 추가<br>
       background 이미지 추가 방법: https://github.com/ultralytics/yolov5/issues/2844
 
@@ -300,17 +300,8 @@ test_src_path = "test_image.png"
 
 <br>
 
-# 5. 활용 방안
 
-
-![활용 방안](https://github.com/sesac-google-ai-1st/HnG_highway_yolov8_repo/assets/97524127/a35f03b6-b50a-4f57-846b-899234c96609)
-
-- 위 사진처럼 AI model은 이미지/비디오 속 car, bus, truck의 개수를 찾아낼 수 있다.
-- 따라서 고속도로 CCTV 영상 내 교통량을 자동으로 측정하는 데에 활용할 수 있다.
-
-<br>
-
-# 6. 프로젝트 회고
+# 5. 프로젝트 회고
 
 ### 어려웠던 점
   - 모델 학습을 위해 데이터를 준비하는 과정
