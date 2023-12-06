@@ -233,7 +233,7 @@ test_src_path = "test_image.png"
 
 - background 데이터를 추가함
   - 고속도로 CCTV 자료를 제공하는 [국가교통정보센터](https://its.go.kr/map/cctv)에서 차가 없는 빈 도로 (background) 이미지 150장을 캡쳐함
-  - 위 이미지를 image augmentation(Resize, Crop, Cropout 등) 하여 아래와 같은 이미지를 추가, 599장으로 데이터 증강
+  - 위 이미지를 image augmentation(Resize, Crop, Cropout 등) 하여 아래와 같은 이미지를 생성후 학습 데이터에 추가하여 599장으로 데이터 증강
   - `train/images` 에 background 이미지 **599장** 추가<br>
       background 이미지 추가 방법: https://github.com/ultralytics/yolov5/issues/2844
 
