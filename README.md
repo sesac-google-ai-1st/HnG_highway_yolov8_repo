@@ -65,7 +65,16 @@ test_src_path = "test_image.png"
 - "고속도로 CCTV 교통 영상" 데이터를 활용하여 YOLOv8로 Vehicle Object detection
   - COCO dataset으로 pretrained 된 [YOLOv8](https://docs.ultralytics.com/models/yolov8/) 모델을 <br> AI Hub "고속도로 CCTV 교통 영상" 데이터셋으로 fine tuning
 
-- 평가 metric : **mAP50-95**
+- 객체 검출 정확도 평가 metric : **mAP50-95**
+    - IoU (Intersection over Union = $\frac{교집합}{합집합}$) : 정답과 예측값의 바운딩 박스가 얼마나 겹치는가를 0 ~ 1 사이의 값으로 나타낸 것 <br>
+    TP와 FP를 결정하는 기준
+    - Precision (=$\frac{TP}{TP+FP}$) : 검출된 결과들 중 옳게 검출한 비율
+    - Recall (=$\frac{TP}{TP+FN}$) : 검출해야하는 결과를 얼마나 검출했는지의 비율
+    - Precision-Recall Curve : confidence level에 따른 Precision과 Recall값의 변화 곡선
+      - 검출된 바운딩 박스의 confidence level에 따라 유효한 박스의 개수가 변함
+    - AP : 
+    - mAP : 객체 종류별(car, bus, truck) AP의 평균값
+    - mAP50-95 : IoU 0.5부터 0.95까지 0.05 간격으로 mAP값을 구해서 평균한 값
 
 ### 수행 기간 및 팀원
 
