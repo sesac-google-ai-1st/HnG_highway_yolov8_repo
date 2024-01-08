@@ -67,11 +67,11 @@ test_src_path = "test_image.png"
 
 - 객체 검출 정확도 평가 metric : **mAP50-95**
     - IoU (Intersection over Union = $\frac{교집합}{합집합}$) : 정답과 예측값의 바운딩 박스가 얼마나 겹치는가를 0 ~ 1 사이의 값으로 나타낸 것 <br>
-    TP와 FP를 결정하는 기준
-    - Precision (=$\frac{TP}{TP+FP}$) : 검출된 결과들 중 옳게 검출한 비율
-    - Recall (=$\frac{TP}{TP+FN}$) : 검출해야하는 결과를 얼마나 검출했는지의 비율
+    - Precision (= $\frac{TP}{TP+FP}$) : 검출된 결과들 중 옳게 검출한 비율
+    - Recall (= $\frac{TP}{TP+FN}$) : 검출해야하는 결과를 얼마나 검출했는지의 비율
     - Precision-Recall Curve : confidence level에 따른 Precision과 Recall값의 변화 곡선
-      - 검출된 바운딩 박스의 confidence level에 따라 유효한 박스의 개수가 변함
+      - IoU에 따라 TP와 FP를 결정
+      - confidence level에 따라 검출된 바운딩 박스의 유효 개수가 변함
     - AP : 
     - mAP : 객체 종류별(car, bus, truck) AP의 평균값
     - mAP50-95 : IoU 0.5부터 0.95까지 0.05 간격으로 mAP값을 구해서 평균한 값
@@ -156,9 +156,7 @@ test_src_path = "test_image.png"
 - image 파일 이름과 label을 통해 추출한 정보
  
   <img src='https://github.com/sesac-google-ai-1st/HnG_highway_yolov8_repo/assets/72022988/16805727-3d8d-417b-a94a-87cd163d14a5' width="700" height="200" />  
-- train 데이터의 각 column 별 unique 값
-  
-  <img src='https://github.com/sesac-google-ai-1st/HnG_highway_yolov8_repo/assets/97524127/1beb85a2-2e2b-4806-8316-ed5f6f339f86' width="600" height="250" />
+
 - image 데이터의 시간 및 날씨 분포 (train , valid)
   | 시간 | 날씨 |
   |:----:|:----:|
@@ -195,12 +193,14 @@ test_src_path = "test_image.png"
 |   name   | note | YOLOv8 model | epoch | batch | imgsz | metric (mAP50-95) |
 |:--:|:--------:|:------------:|:-----:|:-----:|:-----:|:-----------------:|
 | baseline |  |    nano     |   25  |  128  |  640  |       0.743       |
-| **exp1** | model & epoch ↑ <br> EarlyStop|    medium     |   58  |  92  |  800  |       **0.813**       |
+| **exp1** | model & epoch ↑ <br> EarlyStop|    medium     |   58  |  92<sup>[1](#footnote_1)</sup>  |  800  |       **0.813**       |
+
+<a name="footnote_1">1. </a> GPU 4개를 사용하였는데, `batch=128` 로 설정 시 `Out Of Memory 에러` 발생. 128보다 작으면서 4의 배수인 92로 설정함.
 
 ![m400](https://github.com/sesac-google-ai-1st/HnG_highway_yolov8_repo/assets/97524127/2afa5d30-5f7a-4ec2-a452-d73f12d9aa03)
 
 ### ➜ exp1 실험 결과
-  - 모델 사이즈를 nano에서 medium model로 키우고 학습 epoch를 25에서 58로 늘린 결과, mAP50-95가 상승했음
+  - 모델 사이즈를 nano에서 medium model로 키우고, 학습 epoch를 25에서 58로 늘린 결과,<br> mAP50-95가 0.743에서 0.813로 0.07만큼 **상승**했음
 
 <br>
 
@@ -209,12 +209,12 @@ test_src_path = "test_image.png"
 ![add data image](https://github.com/sesac-google-ai-1st/HnG_highway_yolov8_repo/assets/97524127/79c71535-a439-45d3-91cd-47bd9ab81b88)
 
 - 데이터를 추가함
-  - 기존에 사용하지 않은 CH05 ~ CH 10의 데이터를 추가하였음
-  - bus와 truck을 위주로 추가하고자 함
-  - (bus + truck) 개수가 car의 개수 보다 많은 이미지만 선택 : 3268장<br>
-    `train_df[train_df['car']<=(train_df['bus']+train_df['truck'])]` <br>
-    ex)<br> 
-    ![add data example](https://github.com/sesac-google-ai-1st/HnG_highway_yolov8_repo/assets/97524127/2c7c29ce-72bb-4012-8301-c68c8d7c3256)
+  - 기존 : validation data로 CH01 ~ CH04만 쓰기 때문에, train data도 CH01 ~ CH04만 사용하였음
+  - 실험2 : 기존에 train에 사용하지 않은 CH05 ~ CH10의 데이터를 추가
+    - 실험1로 mAP50-95가 상승하였기 때문에, 실험1에 기반하여 YOLOv8 model medium으로 함
+    - bus와 truck을 위주로 추가하고자 함
+    - (bus + truck) 개수가 car의 개수 보다 많은 이미지만 선택 : 3268장<br>
+      `train_df[train_df['car']<=(train_df['bus']+train_df['truck'])]` <br>
 
 |   name   | note | YOLOv8 model | epoch | batch | imgsz | metric (mAP50-95) |
 |:--:|:--------:|:------------:|:-----:|:-----:|:-----:|:-----------------:|
@@ -226,7 +226,7 @@ test_src_path = "test_image.png"
 ![aug m71](https://github.com/sesac-google-ai-1st/HnG_highway_yolov8_repo/assets/97524127/b182c20f-ceaf-4991-8ece-9dd459059d02)
 
 ### ➜ exp2 실험 결과
--  데이터를 추가한 exp2가 exp1 보다 mAP50-95 낮음
+-  기존 train에 사용하지 않은 CH05 ~ CH10의 데이터를 추가한 exp2의 mAP50-95는 0.806로, exp1 보다  0.007만큼 낮음
      - validation 이미지는 CH01 ~ CH04의 이미지뿐이라서, 오히려 그 외 채널 이미지를 학습한 것이 평가에 방해됐나?
      - exp1 보다 imgsz가 낮아서?
      - 더 학습을 하면 성능이 올라갈 수 있었는데, 시간 관계 상 멈춰서?
@@ -234,17 +234,17 @@ test_src_path = "test_image.png"
 <br>
 
 ## 실험 3 : add background data
-![스크린샷 2023-12-06 165445](https://github.com/sesac-google-ai-1st/HnG_highway_yolov8_repo/assets/72022988/816d0ad6-2c10-4894-8478-1119557064d6)  
-<br/>
-
-![스크린샷 2023-12-06 165013](https://github.com/sesac-google-ai-1st/HnG_highway_yolov8_repo/assets/72022988/a6e1fdd5-9e0c-43ec-8940-b9eccd0a3018)
 
 
 - background 데이터를 추가함
+  [![스크린샷 2024-01-08 093531](https://github.com/sesac-google-ai-1st/HnG_highway_yolov8_repo/assets/97524127/09d24cdc-af57-4362-bd10-e55857db202f)](https://its.go.kr/map/cctv)
+
   - 고속도로 CCTV 자료를 제공하는 [국가교통정보센터](https://its.go.kr/map/cctv)에서 차가 없는 빈 도로 (background) 이미지 150장을 캡쳐함
-  - 위 이미지를 image augmentation(Resize, Crop, Cropout 등) 하여 아래와 같은 이미지를 생성후 학습 데이터에 추가하여 599장으로 데이터 증강
-  - `train/images` 에 background 이미지 **599장** 추가<br>
+  - 위 사이트에서 캡쳐한 이미지를 augmentation(Resize, Crop, Cropout 등) 하여 599장으로 데이터 증강
+  - `train/images` 에 증강한 background 이미지 **599장** 추가<br>
       background 이미지 추가 방법: https://github.com/ultralytics/yolov5/issues/2844
+
+  <img width="290" alt="background image 1" src="https://github.com/sesac-google-ai-1st/HnG_highway_yolov8_repo/assets/72022988/816d0ad6-2c10-4894-8478-1119557064d6"> <img width="300" alt="background image 1" src="https://github.com/sesac-google-ai-1st/HnG_highway_yolov8_repo/assets/72022988/a6e1fdd5-9e0c-43ec-8940-b9eccd0a3018">
 
   <br/>
 |   name   | note | YOLOv8 model | epoch | batch | imgsz | metric (mAP50-95) |
@@ -258,13 +258,26 @@ test_src_path = "test_image.png"
 ![back m100](https://github.com/sesac-google-ai-1st/HnG_highway_yolov8_repo/assets/97524127/f6269eb7-130d-473a-a119-bffbe689613b)
 
 ### ➜ exp3-1 실험 결과
-  - exp1과 exp3-1은 background 이미지 차이뿐인데, 거의 모든 성능 지표에서 exp3-1가 미세하게 높음
+  - exp3-1은 기존에 가장 높은 성능을 보인 exp1과 동일한 세팅에 background 이미지를 추가한 것
+  - exp1과 exp3-1는 background 이미지 차이뿐인데, 거의 모든 성능 지표에서 exp3-1가 미세하게 높음
+    - 상승한 지표
+      - Precision: all은 0.909에서 0.917로 0.008만큼 상승, car는 0.94에서 0.942로 0.002만큼 상승, bus는 0.893에서 0.909로 0.016만큼 상승, truck은 0.893에서 0.9로 0.007만큼 상승
+      - Recall: all은 0.884에서 0.886로 0.002만큼 상승, car는 0.92에서 0.921로 0.001만큼 상승, truck은 0.881에서 0.886로 0.005만큼 상승
+      - mAP50: all은 0.943에서 0.947로 0.004만큼 상승, car는 0.973에서 0.974로 0.001만큼 상승, bus는 0.915에서 0.92로 0.005만큼 상승, truck은 0.942에서 0.946로 0.004만큼 상승
+      - mAP50-95: **all은 0.813에서 0.814로 0.001만큼 상승**, bus는 0.785에서 0.786로 0.001만큼 상승, truck은 0.802에서 0.804로 0.002만큼 상승
+    - 하락한 지표
+      - Recall: bus가 0.852에서 0.851로 0.001만큼 하락
+      - mAP50-95: car가 0.852에서 0.851로 0.001만큼 하락
   - **background 이미지 추가한 것이 효과 있다**는 의미
  
   <br/>
 
 ---
   <br/>
+
+- 이전까지 실험한 결과, background 이미지를 추가한 exp3-1가 가장 높은 성능을 보였음
+- 하지만 실험1을 통해 모델 사이즈를 키우면, 성능이 올라간다는 것을 확인했음
+- exp3-2는 background 이미지를 추가한 exp3-1를 기반으로 하고, 실험1의 결과를 참고하여 모델사이즈를 medium에서 xlarge로 키움
 
 |   name   | note | YOLOv8 model | epoch | batch | imgsz | metric (mAP50-95) |
 |:--:|:--------:|:------------:|:-----:|:-----:|:-----:|:-----------------:|
@@ -279,19 +292,20 @@ test_src_path = "test_image.png"
 ![results](https://github.com/sesac-google-ai-1st/3monkey_yolo/assets/97524127/b3b9d5e9-cbf6-413c-9f39-9082b004bf75)
 ![confusion_matrix_normalized](https://github.com/sesac-google-ai-1st/3monkey_yolo/assets/97524127/cee42e17-82fc-4102-98e6-de54e9befdcf)
 ### ➜ exp3-2 실험 결과
-  - exp3-1 결과를 참고하여 모델 사이즈를 키우니,<br>
-   👏👏👏 best mAP50-95 결과를 얻음 👏👏👏
-
+  
+  - background 이미지를 추가한 exp3-1를 기반으로 하고, 모델 사이즈를 키우니,<br> **exp3-1의 mAP50-95는 0.814였는데, exp3-2는 0.823으로 0.09만큼 상승함**
+  - 각 클래스(car, bus, truck)의 mAP50-95도 0.005~0.015만큼 상승하였음
+  - 👏👏👏 best mAP50-95 결과를 얻음 👏👏👏
 <br>
 
 # 4. 결과
 
-### baseline과 best model의 predict 비교<sup>[1](#footnote_1)</sup>
+### baseline과 best model의 predict 비교<sup>[2](#footnote_2)</sup>
 ![highway-optimize](https://github.com/sesac-google-ai-1st/HnG_highway_yolov8_repo/assets/97524127/387caefc-53ff-48cb-b9fe-7e960dbaee12)
 
 | baseline                                | best                               |
 |:-----------------------------------------:|:------------------------------------:|
-| CCTV 영상 내 글자를 car로 인식함        | 그런 현상 없음                     |
+| CCTV 영상 내 글자("릉","동")를 car로 인식함        | 그런 현상 없음                     |
 | 멀리서 오는 bus를 초반에 truck으로 인식 | 멀리서부터 bus로 인식              |
 
 - **결론**
@@ -300,14 +314,18 @@ test_src_path = "test_image.png"
 <br/>  
 
 - **한계점**
-  - 객체가 가로등이나 CCTV 내 글자에 가려지면 인식률이 떨어짐
-  - 객체를 어느 정도 거리부터 인식할 수 있는지 기준이 정확하지 않음
+  - 객체가 가로등이나 CCTV 내 글자에 가려지면 인식률이 떨어짐<sup>[3](#footnote_3)</sup>
+  - 객체를 어느 정도 거리부터 인식할 수 있는지 기준이 정확하지 않음<sup>[4](#footnote_4)</sup>
   - 검증 영상의 화질에 따라 정확도에 영향을 미침
   - best 모델의 크기가 커서 검증 속도가 느리기 때문에 고속도로 실시간 분석에 어려움이 있음
 
 <br>
 
-<a name="footnote_1">1</a>. 영상 출처: [국가교통정보센터](https://its.go.kr/map/cctv) 영동선 신갈분기점 CCTV
+<a name="footnote_2">2. </a> 영상 출처: [국가교통정보센터](https://its.go.kr/map/cctv) 영동선 신갈분기점 CCTV<br>
+<a name="footnote_3">3. </a> 아래 사진에서 노란원을 보면, 가로등에 가린 차가 인식되지 않음.<br>
+<a name="footnote_4">4. </a> 아래 사진에서 까만박스를 보면, 앞에 있는 car는 인식되지 않고, 그보다 뒤에 있는 truck을 인식한 것을 볼 수 있음.<br>
+![image](https://github.com/sesac-google-ai-1st/HnG_highway_yolov8_repo/assets/97524127/4565cc3b-e529-48c4-bb22-fccf143013b8)
+
 
 <br>
 
