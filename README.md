@@ -195,7 +195,7 @@ test_src_path = "test_image.png"
 | baseline |  |    nano     |   25  |  128  |  640  |       0.743       |
 | **exp1** | model & epoch ↑ <br> EarlyStop|    medium     |   58  |  92<sup>[1](#footnote_1)</sup>  |  800  |       **0.813**       |
 
-<a name="footnote_1">1. </a> GPU 4개를 사용하였는데, `batch=128` 로 설정 시 `Out Of Memory 에러` 발생. 128보다 작으면서 4의 배수인 92로 설정함.
+<a name="footnote_1">1.</a> GPU 4개를 사용하였는데, `batch=128` 로 설정 시 `Out Of Memory 에러` 발생. 128보다 작으면서 4의 배수인 92로 설정함.
 
 ![m400](https://github.com/sesac-google-ai-1st/HnG_highway_yolov8_repo/assets/97524127/2afa5d30-5f7a-4ec2-a452-d73f12d9aa03)
 
@@ -321,9 +321,9 @@ test_src_path = "test_image.png"
 
 <br>
 
-<a name="footnote_2">2. </a> 영상 출처: [국가교통정보센터](https://its.go.kr/map/cctv) 영동선 신갈분기점 CCTV<br>
-<a name="footnote_3">3. </a> 아래 사진에서 노란원을 보면, 가로등에 가린 차가 인식되지 않음.<br>
-<a name="footnote_4">4. </a> 아래 사진에서 까만박스를 보면, 앞에 있는 car는 인식되지 않고, 그보다 뒤에 있는 truck을 인식한 것을 볼 수 있음.<br>
+<a name="footnote_2">2.</a> 영상 출처: [국가교통정보센터](https://its.go.kr/map/cctv) 영동선 신갈분기점 CCTV<br>
+<a name="footnote_3">3.</a> 아래 사진에서 노란원을 보면, 가로등에 가린 차가 인식되지 않음.<br>
+<a name="footnote_4">4.</a> 아래 사진에서 까만박스를 보면, 앞에 있는 car는 인식되지 않고, 그보다 뒤에 있는 truck을 인식한 것을 볼 수 있음.<br>
 ![image](https://github.com/sesac-google-ai-1st/HnG_highway_yolov8_repo/assets/97524127/4565cc3b-e529-48c4-bb22-fccf143013b8)
 
 
