@@ -72,7 +72,8 @@ test_src_path = "test_image.png"
     - Precision-Recall Curve : confidence level에 따른 Precision과 Recall값의 변화 곡선
       - IoU에 따라 TP와 FP를 결정
       - confidence level에 따라 검출된 바운딩 박스의 유효 개수가 변함
-    - AP : Precision-Recall Curve 의 선 아래 쪽의 면적 - 높을 수록 그 알고리즘의 성능이 전체적으로 우수하다는 의미
+    - AP : Precision-Recall Curve 의 선 아래 쪽의 면적 
+      - 높을 수록 그 알고리즘의 성능이 전체적으로 우수하다는 의미
     - mAP : 객체 종류별(car, bus, truck) AP의 평균값
     - mAP50-95 : IoU 0.5부터 0.95까지 0.05 간격으로 mAP값을 구해서 평균한 값
 
